@@ -34,9 +34,48 @@ function renderTable(data) {
     });
     $('#tbody').html(tableBody);
 }
-})
 
 
+
+
+$('.speaker-form').submit(function(e){
+    e.preventDefault(); 
+
+    var formData = $(this).serialize(); 
+    var formulario_de_registro = document.getElementById("formulario_de_registro");
+
+$.ajax({
+    url: 'PHP/form.php', 
+    type: 'POST', 
+    data: formData,
+    dataType: 'json',
+    success: function(response) {
+        alert("Formulario enviado exitosamente"); 
+        console.log(response); 
+// Reset the form
+formulario_de_registro.reset();
+
+
+
+ 
+ $.ajax({
+    url: 'PHP/list.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+                renderTable(data);
+            },
+            error: function() {
+                console.error("Error al obtener los datos.");
+            }
+        });
+    },
+    error: function(){
+        alert("Hubo un problema al enviar el formulario. Intente nuevamente.");
+    },    
+ });
+});
+});
 
 //obtener usuario y actualizar
 
@@ -68,7 +107,7 @@ $(document).on('click', '.btn-editar', function() {
                 alert("Error al obtener los datos del usuario.");
             }
         },
-        error: function(xhr, status, error) {
+        error: function() {
             console.error("Error al obtener los datos del usuario: ", error);
             alert("No se pudo cargar la información del usuario.");
         }
@@ -88,6 +127,7 @@ $('#formEditar').submit(function(e) {
           
             if (response.success) {
                 alert('Usuario actualizado correctamente');
+                location.reload();
             } else {
                 alert('Error');
             }
@@ -114,6 +154,7 @@ function deleteUser(userId) {
             if (response.success) {
              
              alert('Usuario eliminado correctamente'); 
+             location.reload();
             } else {
                 alert('Hubo un error al eliminar el usuario');
                 }
@@ -124,27 +165,3 @@ function deleteUser(userId) {
         });
     }
 }
-
-
-$(document).ready(function(){
-    $('.speaker-form').submit(function(e){
-        e.preventDefault(); 
-  
-        var formData = $(this).serialize(); 
-  
-    $.ajax({
-        url: 'PHP/form.php', 
-        type: 'POST', 
-        data: formData,
-        dataType: 'json',
-        success: function(response) {
-            alert("Formulario enviado exitosamente"); 
-            console.log(response); 
-        },
-        error: function(){
-            alert("Hubo un problema al enviar el formulario. Intente nuevamente.");
-        },    
-     });
-   });
-  });
-  
