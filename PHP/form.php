@@ -1,6 +1,4 @@
 <?php
-
-
 $user = "root";
 $password = "123456789";
 $database = "hello_mysql";
@@ -40,14 +38,15 @@ $insertar = "INSERT INTO formulario_de_registro (nombre_completo, genero, fecha_
 
 $query = mysqli_query($conection, $insertar);
 
-if ($query) {
+if ($query) { 
+    echo json_encode(["success" => "Registro guardado exitosamente."]); 
+} else { 
+    echo json_encode(["error" => "Error al guardar el registro: " . mysqli_error($connection)]);
 
-    echo "Registro guardado exitosamente.";
-} else {
-    echo "Error al guardar el registro: ";
-
-}
-
+} 
+header('Content-Type: application/json');
+error_reporting(E_ALL);
+ini_set('display_errors', 1); 
 ?>
 
 

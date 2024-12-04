@@ -27,7 +27,7 @@ function renderTable(data) {
                 <td>${user.direccion}</td>
                 <td>${user.email}</td>
                 <td>${user.phone}</td>
-                <td><button class="btn-editar" data-id="${user.formulario_de_registro_id}">Editar</button></td>
+                <td><button class="btn-editar btn btn-primary" data-id="${user.formulario_de_registro_id}" data-bs-toggle="modal" data-bs-target="#editar">Editar</button></td>
                 <td><button class="btn btn-outline-dark" onclick="deleteUser(${user.formulario_de_registro_id})">Eliminar</button></td>
             </tr>
         `;
@@ -42,7 +42,7 @@ function renderTable(data) {
 
 $(document).on('click', '.btn-editar', function() {
     var userId = $(this).data('id'); 
-   
+   console.log(userId);
     $.ajax({
         url: 'PHP/obtener_usuario.php', 
         method: 'GET',
@@ -124,3 +124,27 @@ function deleteUser(userId) {
         });
     }
 }
+
+
+$(document).ready(function(){
+    $('.speaker-form').submit(function(e){
+        e.preventDefault(); 
+  
+        var formData = $(this).serialize(); 
+  
+    $.ajax({
+        url: 'PHP/form.php', 
+        type: 'POST', 
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            alert("Formulario enviado exitosamente"); 
+            console.log(response); 
+        },
+        error: function(){
+            alert("Hubo un problema al enviar el formulario. Intente nuevamente.");
+        },    
+     });
+   });
+  });
+  
