@@ -41,7 +41,7 @@ $query = mysqli_query($conection, $insertar);
 if ($query) { 
     echo json_encode(["success" => "Registro guardado exitosamente."]); 
 } else { 
-    echo json_encode(["error" => "Error al guardar el registro: " . mysqli_error($connection)]);
+    echo json_encode(["error" => "Error al guardar el registro: " . mysqli_error($conection)]);
 
 } 
 header('Content-Type: application/json');
