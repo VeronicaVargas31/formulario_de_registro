@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 </head>
 <body>
     <h1>Lista de usuarios</h1>
-    <table class="table">
+    <table class="table table-striped" id="myTable">
         <thead>
           <tr>
             <th>ID</th>
@@ -744,12 +745,13 @@
   </div>
 </div>
 <form action="PHP/exportar.php">
-  <button type="submit" name="export" value="Exportación CSV">Exportar</button>
+  <button class="btn btn-danger" type="submit" name="export" value="Exportación CSV">Exportar</button>
 </form>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="Scripts/crud.js"></script>
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
 </body>
 </html>
