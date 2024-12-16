@@ -18,7 +18,8 @@ $usuarios = [];
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $row['botons'] = '<button class="btn-editar btn btn-primary" data-id="' . $row['formulario_de_registro_id'] . '" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-        <button class="btn btn-outline-dark" onclick="deleteUser(' . $row['formulario_de_registro_id'] . ')">Eliminar</button>';
+        <button class="btn btn-outline-dark" onclick="deleteUser(' . $row['formulario_de_registro_id'] . ')">Eliminar</button>
+        <a href="PHP/fpdf.php?id=' . $row['formulario_de_registro_id'] . '" class="btn btn-secondary"><i class="bi bi-arrow-down-circle"></i>PDF</a>';
         $usuarios[] = $row;
     }
 }
